@@ -1,0 +1,6 @@
+{
+    "level": 1,
+    "filename": "./log/s_g_log.log",
+    "log_msg_list_max": 16777216,
+    "file_count_max": 16777216
+}
