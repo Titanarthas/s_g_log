@@ -159,6 +159,24 @@ func Errorf(format string, v ...interface{}) {
 	}
 }
 
+
+func ErrorStackf(format string, v ...interface{}) {
+	// if logLevel <= LOG_ERROR
+	{
+		var bufStack []byte
+		buf := make([]byte, 1024)
+		for {
+			n := runtime.Stack(buf, false)
+			if n < len(buf) {
+				bufStack = buf[:n]
+				break
+			}
+			buf = make([]byte, 2*len(buf))
+		}
+		output(2, fmt.Sprintf("%s %s \nstack is \n%s", "LOG_ERROR", fmt.Sprintf(format, v...), bufStack))
+	}
+}
+
 func output(calldepth int, s string)  {
 	now := time.Now() // get this early.
 	var file string
